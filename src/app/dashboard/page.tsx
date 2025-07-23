@@ -1,19 +1,11 @@
-import { getSession } from "next-auth/react";
-import { GetServerSidePropsContext } from "next";
+import React from 'react';
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-    const session = await getSession(context);
-
-    if (!session) {
-        return {
-            redirect: {
-                destination: "/signin",
-                permanent: false,
-            },
-        };
-    }
-
-    return {
-        props: { session },
-    };
+function page() {
+    return (
+        <div>
+            asdf
+        </div>
+    );
 }
+
+export default page;
