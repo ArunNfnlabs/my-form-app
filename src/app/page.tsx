@@ -39,7 +39,9 @@ const AdminDashboard: React.FC = () => {
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
-    if (isLoggedIn !== "true") {
+    const userEmail = localStorage.getItem("userEmail");
+    const userPassword = localStorage.getItem("userPassword");
+    if (isLoggedIn !== "true" || userEmail !== "admin@websiteChat.com" || userPassword !== "websiteChat@123") {
       router.push("/signin");
       return;
     }
@@ -103,14 +105,14 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
-  const formatLastSeen = (dateString: string): string => {
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
-    if (diffInHours < 1) return 'Just now';
-    if (diffInHours < 24) return `${diffInHours}h ago`;
-    return `${Math.floor(diffInHours / 24)}d ago`;
-  };
+  // const formatLastSeen = (dateString: string): string => {
+  //   const date = new Date(dateString);
+  //   const now = new Date();
+  //   const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+  //   if (diffInHours < 1) return 'Just now';
+  //   if (diffInHours < 24) return `${diffInHours}h ago`;
+  //   return `${Math.floor(diffInHours / 24)}d ago`;
+  // };
 
   const stats: Stats = {
     totalUsers: users.length,

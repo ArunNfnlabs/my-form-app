@@ -8,23 +8,25 @@ const SignIn = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
-    const handleLogin = () => {
-        const dummyEmail = "admin@email.com";
-        const dummyPassword = "admin123";
+    const dummyEmail = "admin@websiteChat.com";
+    const dummyPassword = "websiteChat@123";
 
+    const handleLogin = () => {
         if (email === dummyEmail && password === dummyPassword) {
             localStorage.setItem("isLoggedIn", "true");
-            router.push("/"); // redirect to dashboard
+            localStorage.setItem("userEmail", email);
+            localStorage.setItem("userPassword", password);
+            router.push("/");
         } else {
             setError("Invalid email or password");
         }
     };
 
     useEffect(() => {
-        if (localStorage.getItem("isLoggedIn") === "true") {
+        if (localStorage.getItem("isLoggedIn") === "true" && localStorage.getItem("userEmail") === email && localStorage.getItem("userPassword") === password) {
             router.push("/");
         }
-    }, []);
+    }, [email, password, router]);
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
