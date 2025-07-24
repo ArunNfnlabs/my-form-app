@@ -47,7 +47,7 @@ const AdminDashboard: React.FC = () => {
     const fetchUsers = async () => {
       try {
         setIsLoading(true);
-        const res = await fetch('http://localhost:3000/users/v1/all-users-basic-info');
+        const res = await fetch('https://api-dev.websitechat.in/users/v1/all-users-basic-info');
         if (!res.ok) throw new Error(`Error: ${res.status}`);
         const data = await res.json();
 
