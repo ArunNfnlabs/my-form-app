@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
@@ -49,14 +50,14 @@ const AdminDashboard: React.FC = () => {
     const fetchUsers = async () => {
       try {
         setIsLoading(true);
-        const res = await fetch('https://api-dev.websitechat.in/users/v1/all-users-basic-info');
+        const res = await fetch('https://api-qa.websitechat.in/users/v1/all-users-basic-info');
         if (!res.ok) throw new Error(`Error: ${res.status}`);
         const data = await res.json();
 
         // Transform the API data to match UserData interface
         const mappedUsers: UserData[] = (data?.data || []).map((user: any, index: number) => ({
           id: index + 1, // generate dummy ID
-          name: user.name ?? 'Unnamed User',
+          name: user.name ?? 'WebsiteChat User',
           email: user.email,
           chatbotCreated: user.chatbot_created,
           lastSeen: new Date().toISOString(), // add dummy lastSeen value
@@ -130,15 +131,15 @@ const AdminDashboard: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center">
-              <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center">
-                <User className="w-6 h-6 text-white" />
-              </div>
-              <h1 className="ml-4 text-2xl font-bold text-gray-900">Admin WebsiteChat</h1>
+              <img src="/logo.png" alt="logo" className="w-8 h-8" />
+              <h1 className="ml-2 text-2xl font-bold text-gray-900">Admin WebsiteChat</h1>
             </div>
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => {
                   localStorage.removeItem("isLoggedIn");
+                  localStorage.removeItem("userEmail");
+                  localStorage.removeItem("userPassword");
                   router.push("/signin");
                 }}
                 className="text-sm text-gray-500 hover:text-orange-500"
